@@ -3153,6 +3153,23 @@ namespace ts {
         );
     }
 
+    export function createArrayProtoSliceCall(value: Expression) {
+        return createCall(
+            createPropertyAccess(
+                createPropertyAccess(
+                    createPropertyAccess(
+                        createIdentifier('Array'),
+                        'prototype',
+                    ),
+                    'slice',
+                ),
+                'call',
+            ),
+            undefined,
+            [value],
+        );
+    }
+
     export function createMathPow(left: Expression, right: Expression, location?: TextRange) {
         return setTextRange(
             createCall(

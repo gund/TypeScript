@@ -3864,12 +3864,12 @@ namespace ts {
                 if (segments.length === 1) {
                     const firstElement = elements[0];
                     return needsUniqueCopy && isSpreadElement(firstElement) && firstElement.expression.kind !== SyntaxKind.ArrayLiteralExpression
-                        ? createArraySlice(segments[0])
+                        ? createArrayProtoSliceCall(segments[0])
                         : segments[0];
                 }
 
                 // Rewrite using the pattern <segment0>.concat(<segment1>, <segment2>, ...)
-                return createArrayConcat(segments.shift()!, segments);
+                return createArrayConcat(segments.shift()!, segments.map(createArrayProtoSliceCall));
             }
         }
 
